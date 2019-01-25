@@ -8,8 +8,18 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface AppDelegate : NSObject <NSApplicationDelegate>
+@interface AppDelegate : NSObject <NSApplicationDelegate> {
+    unsigned numCPUs;
+    NSLock *cpuUsageLock;
+    NSStatusItem *statusItem;
+    processor_info_array_t cpuInfo, prevCpuInfo;
+    mach_msg_type_number_t numCpuInfo, prevNumCpuInfo;
+    
+}
 
+@property (readonly, nonatomic) IBOutlet NSMenu *menu;
+
+-(void) updateInfo:(NSTimer*)timer;
 
 @end
 
