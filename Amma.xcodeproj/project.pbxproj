@@ -16,7 +16,7 @@
 
 /* Begin PBXFileReference section */
 		AE1456D521FB1BF10076A829 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		AE9D96EB21FABA59001035C7 /* CpuUsage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CpuUsage.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AE9D96EB21FABA59001035C7 /* Amma.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Amma.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE9D96EE21FABA59001035C7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		AE9D96EF21FABA59001035C7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		AE9D96F121FABA59001035C7 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
@@ -24,7 +24,7 @@
 		AE9D96F721FABA5B001035C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AE9D96F921FABA5B001035C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AE9D96FA21FABA5B001035C7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		AE9D96FC21FABA5B001035C7 /* CpuUsage.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CpuUsage.entitlements; sourceTree = "<group>"; };
+		AE9D96FC21FABA5B001035C7 /* Amma.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Amma.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,7 +41,7 @@
 		AE9D96E221FABA59001035C7 = {
 			isa = PBXGroup;
 			children = (
-				AE9D96ED21FABA59001035C7 /* CpuUsage */,
+				AE9D96ED21FABA59001035C7 /* Amma */,
 				AE9D96EC21FABA59001035C7 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -49,12 +49,12 @@
 		AE9D96EC21FABA59001035C7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				AE9D96EB21FABA59001035C7 /* CpuUsage.app */,
+				AE9D96EB21FABA59001035C7 /* Amma.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		AE9D96ED21FABA59001035C7 /* CpuUsage */ = {
+		AE9D96ED21FABA59001035C7 /* Amma */ = {
 			isa = PBXGroup;
 			children = (
 				AE9D96EE21FABA59001035C7 /* AppDelegate.h */,
@@ -65,17 +65,17 @@
 				AE9D96F621FABA5B001035C7 /* Main.storyboard */,
 				AE9D96F921FABA5B001035C7 /* Info.plist */,
 				AE9D96FA21FABA5B001035C7 /* main.m */,
-				AE9D96FC21FABA5B001035C7 /* CpuUsage.entitlements */,
+				AE9D96FC21FABA5B001035C7 /* Amma.entitlements */,
 			);
-			path = CpuUsage;
+			path = Amma;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		AE9D96EA21FABA59001035C7 /* CpuUsage */ = {
+		AE9D96EA21FABA59001035C7 /* Amma */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AE9D96FF21FABA5B001035C7 /* Build configuration list for PBXNativeTarget "CpuUsage" */;
+			buildConfigurationList = AE9D96FF21FABA5B001035C7 /* Build configuration list for PBXNativeTarget "Amma" */;
 			buildPhases = (
 				AE9D96E721FABA59001035C7 /* Sources */,
 				AE9D96E821FABA59001035C7 /* Frameworks */,
@@ -85,9 +85,9 @@
 			);
 			dependencies = (
 			);
-			name = CpuUsage;
+			name = Amma;
 			productName = CpuUsage;
-			productReference = AE9D96EB21FABA59001035C7 /* CpuUsage.app */;
+			productReference = AE9D96EB21FABA59001035C7 /* Amma.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -104,7 +104,7 @@
 					};
 				};
 			};
-			buildConfigurationList = AE9D96E621FABA59001035C7 /* Build configuration list for PBXProject "CpuUsage" */;
+			buildConfigurationList = AE9D96E621FABA59001035C7 /* Build configuration list for PBXProject "Amma" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -117,7 +117,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				AE9D96EA21FABA59001035C7 /* CpuUsage */,
+				AE9D96EA21FABA59001035C7 /* Amma */,
 			);
 		};
 /* End PBXProject section */
@@ -274,15 +274,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = CpuUsage/CpuUsage.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Amma/Amma.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = CpuUsage/Info.plist;
+				INFOPLIST_FILE = Amma/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = none.CpuUsage;
+				PRODUCT_BUNDLE_IDENTIFIER = none.Amma;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -291,15 +291,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = CpuUsage/CpuUsage.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Amma/Amma.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = CpuUsage/Info.plist;
+				INFOPLIST_FILE = Amma/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = none.CpuUsage;
+				PRODUCT_BUNDLE_IDENTIFIER = none.Amma;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -307,7 +307,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		AE9D96E621FABA59001035C7 /* Build configuration list for PBXProject "CpuUsage" */ = {
+		AE9D96E621FABA59001035C7 /* Build configuration list for PBXProject "Amma" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AE9D96FD21FABA5B001035C7 /* Debug */,
@@ -316,7 +316,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AE9D96FF21FABA5B001035C7 /* Build configuration list for PBXNativeTarget "CpuUsage" */ = {
+		AE9D96FF21FABA5B001035C7 /* Build configuration list for PBXNativeTarget "Amma" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AE9D970021FABA5B001035C7 /* Debug */,

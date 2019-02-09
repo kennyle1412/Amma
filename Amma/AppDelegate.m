@@ -17,7 +17,7 @@
 
 @synthesize menu;
 
-#define REPEAT_TIMER 5
+#define DEFAULT_REPEAT_TIMER 3
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     // Get number of cpus
@@ -46,7 +46,7 @@
     cpuUsageLock = [[NSLock alloc] init];
     
     // Set update timer
-    [NSTimer scheduledTimerWithTimeInterval:REPEAT_TIMER target:self selector:@selector(updateInfo:) userInfo:nil repeats:YES];
+    timer = [NSTimer scheduledTimerWithTimeInterval:DEFAULT_REPEAT_TIMER target:self selector:@selector(updateInfo:) userInfo:nil repeats:YES];
 }
 
 // Obtained CPU logic from https://stackoverflow.com/a/6795612

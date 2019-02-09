@@ -9,12 +9,13 @@
 #import <Cocoa/Cocoa.h>
 
 @interface AppDelegate : NSObject <NSApplicationDelegate> {
-    unsigned numCPUs;
-    NSLock *cpuUsageLock;
     NSStatusItem *statusItem;
+
+    NSTimer *timer;
+    NSLock *cpuUsageLock;
     processor_info_array_t cpuInfo, prevCpuInfo;
     mach_msg_type_number_t numCpuInfo, prevNumCpuInfo;
-    
+    unsigned numCPUs;
 }
 
 @property (readonly, nonatomic) IBOutlet NSMenu *menu;
