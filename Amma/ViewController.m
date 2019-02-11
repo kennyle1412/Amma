@@ -10,18 +10,35 @@
 
 @implementation ViewController
 
+@synthesize quitButton;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    // Do any additional setup after loading the view.
+    self.quitButton.action = @selector(quitApplication:);
 }
 
-
-- (void)setRepresentedObject:(id)representedObject {
-    [super setRepresentedObject:representedObject];
-
-    // Update the view, if already loaded.
+- (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
+    NSString *identifier = [tableColumn.title stringByAppendingString:[@(row) stringValue]];
+    NSTextField *result  = [tableView makeViewWithIdentifier:identifier owner:self];
+    
+    if (result == nil) {
+        result = [[NSTextField alloc] init];
+        result.identifier = identifier;
+    }
+    
+    if ([tableColumn.title isEqualToString:@"Core"]) {
+        result.stringValue = [NSString stringWithFormat:@"%ld", row];
+    } else {
+        result.stringValue = [NSString stringWithFormat:@"%.0f%%", [self.percentageArray[row] floatValue]];
+    }
+    return result;
+}
+- (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView {
+    return self.percentageArray.count;
 }
 
+- (void)quitApplication:(id)sender {
+    [NSApp terminate:self];
+}
 
 @end

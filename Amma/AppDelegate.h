@@ -7,23 +7,26 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "ViewController.h"
 
 @interface AppDelegate : NSObject <NSApplicationDelegate> {
     // CPU Information
-    unsigned numCPUs;
+    // unsigned numCPUs;
     NSTimer *updateTimer;
     NSLock *cpuUsageLock;
     processor_info_array_t cpuInfo, prevCpuInfo;
     mach_msg_type_number_t numCpuInfo, prevNumCpuInfo;
 
     // Menubar status item
+    NSPopover *pop;
     NSStatusItem *statusItem;
 }
 
-@property (weak, nonatomic) IBOutlet NSMenu *menu;
-@property (weak, nonatomic) IBOutlet NSMenuItem *cpuMenu;
+@property unsigned numCPUs;
+@property (weak) ViewController *viewController;
 
 -(void) updateInfo:(NSTimer*)timer;
+-(void) toggleView:(id)sender;
 
 @end
 

@@ -15,9 +15,9 @@
 
 @implementation AppDelegate
 
-@synthesize menu, cpuMenu;
-
 #define DEFAULT_REPEAT_TIMER 3
+
+@synthesize viewController, numCPUs;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     // Get number of cpus
@@ -29,13 +29,6 @@
         [NSApp terminate:self];
     }
     
-    // Add cpus to cpu menu
-    for (unsigned i = 0; i < numCPUs; ++i) {
-        NSMenuItem *item = [[NSMenuItem alloc] init];
-        item.title = [NSString stringWithFormat:@"Core %d: 0%%", i];
-        [self.cpuMenu.submenu addItem:item];
-    }
-
     // Preload prevCpuInfo
     natural_t numCPUsU = 0;
     error = host_processor_info(mach_host_self(), PROCESSOR_CPU_LOAD_INFO, &numCPUsU, &prevCpuInfo, &prevNumCpuInfo);
@@ -44,13 +37,19 @@
         [NSApp terminate:self];
     }
     
+    self.viewController = [[NSStoryboard mainStoryboard] instantiateControllerWithIdentifier:@"ViewController"];
+    self.viewController.percentageArray = [[NSMutableArray alloc] initWithCapacity:numCPUs];
+    
     cpuUsageLock = [[NSLock alloc] init];
     
     // Create statusbar menu app
     statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
     statusItem.button.toolTip = @"CPU Monitor";
-    statusItem.button.title = @"0%";
-    statusItem.menu = self.menu;
+    statusItem.button.title = @"Loading";
+    statusItem.button.action = @selector(toggleView:);
+    
+    pop = [[NSPopover alloc] init];
+    pop.contentViewController = self.viewController;
 
     // Set update loop
     updateTimer = [NSTimer scheduledTimerWithTimeInterval:DEFAULT_REPEAT_TIMER target:self selector:@selector(updateInfo:) userInfo:nil repeats:YES];
@@ -79,22 +78,35 @@
         float total = inUse + SUB_INFO(CPU_STATE_IDLE);
         
         // NSLog(@"Core: %u Usage: %f",i,inUse / total);
-        self.cpuMenu.submenu.itemArray[i].title = [NSString stringWithFormat:@"Core %d: %0.0f%%", i, 100 * inUse/ total];
+        self.viewController.percentageArray[i] = @(100*inUse/total);
         totalInUse += inUse; totalTotal += total;
     }
     [cpuUsageLock unlock];
-
+    
     // NSLog(@"Total core usage is: %f", totalInUse / totalTotal);
     statusItem.button.title = [NSString stringWithFormat:@"%.0f%%", 100 * totalInUse / totalTotal];
-
-    size_t prevCpuInfoSize = sizeof(int) * prevNumCpuInfo;
-    vm_deallocate(mach_task_self(), (vm_address_t)prevCpuInfo, prevCpuInfoSize);
-
+    if (self.viewController.viewLoaded) {
+        [self.viewController.tableView reloadData];
+    }
+    
+    if (prevCpuInfo) {
+        size_t prevCpuInfoSize = sizeof(int) * prevNumCpuInfo;
+        vm_deallocate(mach_task_self(), (vm_address_t)prevCpuInfo, prevCpuInfoSize);
+    }
+    
     prevCpuInfo = cpuInfo;
     prevNumCpuInfo = numCpuInfo;
     
     cpuInfo = NULL;
     numCpuInfo = 0U;
+}
+
+- (void)toggleView:(id)sender {
+    if (pop.shown) {
+        [pop performClose:pop];
+    } else {
+        [pop showRelativeToRect:statusItem.button.bounds ofView:statusItem.button preferredEdge:NSMinYEdge];
+    }
 }
 
 @end

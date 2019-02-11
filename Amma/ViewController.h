@@ -8,8 +8,13 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface ViewController : NSViewController
+@interface ViewController : NSViewController <NSTableViewDelegate, NSTableViewDataSource>
 
+@property NSMutableArray *percentageArray;
+@property (weak, nonatomic) IBOutlet NSButton *quitButton;
+@property (weak, nonatomic) IBOutlet NSTableView *tableView;
+
+- (void) quitApplication:(id)sender;
 
 @end
 
