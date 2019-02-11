@@ -9,16 +9,19 @@
 #import <Cocoa/Cocoa.h>
 
 @interface AppDelegate : NSObject <NSApplicationDelegate> {
-    NSStatusItem *statusItem;
-
-    NSTimer *timer;
+    // CPU Information
+    unsigned numCPUs;
+    NSTimer *updateTimer;
     NSLock *cpuUsageLock;
     processor_info_array_t cpuInfo, prevCpuInfo;
     mach_msg_type_number_t numCpuInfo, prevNumCpuInfo;
-    unsigned numCPUs;
+
+    // Menubar status item
+    NSStatusItem *statusItem;
 }
 
-@property (readonly, nonatomic) IBOutlet NSMenu *menu;
+@property (weak, nonatomic) IBOutlet NSMenu *menu;
+@property (weak, nonatomic) IBOutlet NSMenuItem *cpuMenu;
 
 -(void) updateInfo:(NSTimer*)timer;
 

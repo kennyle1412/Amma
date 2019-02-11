@@ -15,7 +15,7 @@
 
 @implementation AppDelegate
 
-@synthesize menu;
+@synthesize menu, cpuMenu;
 
 #define DEFAULT_REPEAT_TIMER 3
 
@@ -29,6 +29,13 @@
         [NSApp terminate:self];
     }
     
+    // Add cpus to cpu menu
+    for (unsigned i = 0; i < numCPUs; ++i) {
+        NSMenuItem *item = [[NSMenuItem alloc] init];
+        item.title = [NSString stringWithFormat:@"Core %d: 0%%", i];
+        [self.cpuMenu.submenu addItem:item];
+    }
+
     // Preload prevCpuInfo
     natural_t numCPUsU = 0;
     error = host_processor_info(mach_host_self(), PROCESSOR_CPU_LOAD_INFO, &numCPUsU, &prevCpuInfo, &prevNumCpuInfo);
@@ -37,16 +44,19 @@
         [NSApp terminate:self];
     }
     
-    // Create menulet icon with quit option
+    cpuUsageLock = [[NSLock alloc] init];
+    
+    // Create statusbar menu app
     statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
     statusItem.button.toolTip = @"CPU Monitor";
     statusItem.button.title = @"0%";
     statusItem.menu = self.menu;
+
+    // Set update loop
+    updateTimer = [NSTimer scheduledTimerWithTimeInterval:DEFAULT_REPEAT_TIMER target:self selector:@selector(updateInfo:) userInfo:nil repeats:YES];
     
-    cpuUsageLock = [[NSLock alloc] init];
-    
-    // Set update timer
-    timer = [NSTimer scheduledTimerWithTimeInterval:DEFAULT_REPEAT_TIMER target:self selector:@selector(updateInfo:) userInfo:nil repeats:YES];
+    // Add update timer to main run loop so it doesn't pause when user interacts with the status bar item
+    [[NSRunLoop mainRunLoop] addTimer:updateTimer forMode:NSRunLoopCommonModes];
 }
 
 // Obtained CPU logic from https://stackoverflow.com/a/6795612
@@ -67,15 +77,17 @@
     for (unsigned i = 0; i < numCPUs; ++i) {
         float inUse = SUB_INFO(CPU_STATE_USER) + SUB_INFO(CPU_STATE_SYSTEM) + SUB_INFO(CPU_STATE_NICE);
         float total = inUse + SUB_INFO(CPU_STATE_IDLE);
+        
         // NSLog(@"Core: %u Usage: %f",i,inUse / total);
+        self.cpuMenu.submenu.itemArray[i].title = [NSString stringWithFormat:@"Core %d: %0.0f%%", i, 100 * inUse/ total];
         totalInUse += inUse; totalTotal += total;
     }
     [cpuUsageLock unlock];
-    
-    statusItem.button.title = [NSString stringWithFormat:@"%.0f%%", 100 * totalInUse / totalTotal];
-    // NSLog(@"Total core usage is: %f", totalInUse / totalTotal);
 
-    size_t prevCpuInfoSize = sizeof(integer_t) * prevNumCpuInfo;
+    // NSLog(@"Total core usage is: %f", totalInUse / totalTotal);
+    statusItem.button.title = [NSString stringWithFormat:@"%.0f%%", 100 * totalInUse / totalTotal];
+
+    size_t prevCpuInfoSize = sizeof(int) * prevNumCpuInfo;
     vm_deallocate(mach_task_self(), (vm_address_t)prevCpuInfo, prevCpuInfoSize);
 
     prevCpuInfo = cpuInfo;

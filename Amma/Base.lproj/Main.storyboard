@@ -675,6 +675,7 @@
                 </application>
                 <customObject id="Voe-Tx-rLC" customClass="AppDelegate">
                     <connections>
+                        <outlet property="cpuMenu" destination="Nok-zS-wjh" id="7sd-GI-56w"/>
                         <outlet property="menu" destination="9CA-ip-stQ" id="Sos-7r-VXi"/>
                     </connections>
                 </customObject>
@@ -682,6 +683,10 @@
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <menu id="9CA-ip-stQ">
                     <items>
+                        <menuItem title="Cpu" id="Nok-zS-wjh">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <menu key="submenu" title="Cpu" id="qu6-RS-iVT"/>
+                        </menuItem>
                         <menuItem title="Quit" id="vRd-Ag-qh6">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
@@ -691,7 +696,7 @@
                     </items>
                 </menu>
             </objects>
-            <point key="canvasLocation" x="75" y="0.0"/>
+            <point key="canvasLocation" x="66" y="-156"/>
         </scene>
     </scenes>
 </document>
